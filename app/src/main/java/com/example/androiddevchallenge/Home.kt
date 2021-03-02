@@ -15,14 +15,18 @@
  */
 package com.example.androiddevchallenge.ui
 
-import androidx.compose.material.*
+import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import com.example.androiddevchallenge.MainViewModel
+import com.example.androiddevchallenge.DataStore
 import kotlinx.coroutines.launch
 
 @Composable
-fun Home() {
+fun Home(dataStore: DataStore) {
     val snackbarHostState = SnackbarHostState()
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
@@ -37,11 +41,10 @@ fun Home() {
             SnackbarHost(snackbarHostState)
         }
     ) {
-        val viewModel = MainViewModel()
-        DogList(viewModel.dogs) { dog ->
-            viewModel.showDog(dog)
+        DogList(dataStore.dogs) { dog ->
+            dataStore.showDog(dog)
         }
-        val dog = viewModel.currentDog
+        val dog = dataStore.currentDog
         if (dog != null) {
             DogDetails(dog) {
                 coroutineScope.launch {

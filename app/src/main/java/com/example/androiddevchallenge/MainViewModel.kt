@@ -18,14 +18,13 @@ package com.example.androiddevchallenge
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import com.example.androiddevchallenge.data.Dog
 
 /**
  *
  *
  */
-class MainViewModel : ViewModel() {
+class DataStore {
     val dogs by mutableStateOf(
         listOf(
             Dog(

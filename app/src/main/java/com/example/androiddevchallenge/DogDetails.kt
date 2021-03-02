@@ -17,7 +17,12 @@ package com.example.androiddevchallenge.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
@@ -34,37 +39,39 @@ import com.example.androiddevchallenge.data.Dog
 
 @Composable
 fun DogDetails(dog: Dog, onAdopt: (Dog) -> Unit = {}) {
-    Column(
+    LazyColumn(
         Modifier
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
     ) {
-        Box {
-            Image(
-                painterResource(dog.resId),
-                "Dog picture: ${dog.name}",
-                Modifier.aspectRatio(1f),
-                contentScale = ContentScale.Crop
-            )
-            Button(
-                { onAdopt(dog) },
-                Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(16.dp)
-            ) {
-                Text(text = "Adopt")
+        item(dog) {
+            Box {
+                Image(
+                    painterResource(dog.resId),
+                    "Dog picture: ${dog.name}",
+                    Modifier.aspectRatio(1f),
+                    contentScale = ContentScale.Crop
+                )
+                Button(
+                    { onAdopt(dog) },
+                    Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(16.dp)
+                ) {
+                    Text(text = "Adopt")
+                }
             }
-        }
-        Column(Modifier.padding(18.dp, 12.dp)) {
-            Text("Name: ${dog.name}", style = MaterialTheme.typography.h4)
-            ProvideTextStyle(MaterialTheme.typography.h5) {
-                Text("Gender: ${dog.sex}")
-                Text("Age: ${dog.age}")
-                Text("Size: ${dog.size}")
-                Text("Breed: ${dog.breed}")
-                Text("InData: ${dog.inDate}")
-                Text("IntakeType: ${dog.intakeType}")
-                Text("Location: ${dog.crossing}")
+            Column(Modifier.padding(18.dp, 12.dp)) {
+                Text("Name: ${dog.name}", style = MaterialTheme.typography.h4)
+                ProvideTextStyle(MaterialTheme.typography.h5) {
+                    Text("Gender: ${dog.sex}")
+                    Text("Age: ${dog.age}")
+                    Text("Size: ${dog.size}")
+                    Text("Breed: ${dog.breed}")
+                    Text("InData: ${dog.inDate}")
+                    Text("IntakeType: ${dog.intakeType}")
+                    Text("Location: ${dog.crossing}")
+                }
             }
         }
     }
