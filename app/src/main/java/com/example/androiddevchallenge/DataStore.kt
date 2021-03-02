@@ -635,8 +635,7 @@ class DataStore {
                 "",
                 "CHESTNUT"
             ),
-
-            )
+        )
     )
 
     var currentDog: Dog? by mutableStateOf(null)
